@@ -1,28 +1,14 @@
-﻿using System;
-using System.IO;
+﻿
 using System.Text;
 
 namespace hashit
 {
-    class test
+    class Problem
     {
 
         public static void Main(string[] args)
         {
-            //            const string Test1 = @"1
-            //11
-            //ADD:marsz
-            //ADD:marsz
-            //ADD:Dabrowski
-            //ADD:z
-            //ADD:ziemii
-            //ADD:wloskiej
-            //ADD:do
-            //ADD:Polski
-            //DEL:od
-            //DEL:do
-            //DEL:wloskiej";
-            //            Console.SetIn(new StringReader(Test1));
+            
 
             int t = Convert.ToInt32(Console.ReadLine());
 
@@ -54,12 +40,7 @@ namespace hashit
                         case "DEL":
                             if (fkey != -1)
                             {
-                                //table[ix] = null;
-                                //n--;
-                                //for (int i3 = ix; i3 < n; i3++)
-                                //{
-                                //    table[i3] = table[i3 + 1];
-                                //}
+                                
                                 if (fkey >= 0)
                                 {
                                     table[fkey] = string.Empty;
@@ -69,14 +50,6 @@ namespace hashit
                     }
 
                 }
-
-                //for (int i2 = 0; i2 < table.Length; i2++)
-                //{
-                //    if (table[i2] != null)
-                //    {
-                //        Console.WriteLine(table[i2]);
-                //    }
-                //}
 
                 StringBuilder builder = new StringBuilder();
                 int count = 0;
@@ -96,7 +69,7 @@ namespace hashit
         public static int Hash(string key)
         {
             int ret = 0;
-            ret = h(key) % 101;//h(key)=19 *(ASCII(a1)*1+...+ASCII(an)*n)
+            ret = h(key) % 101;
             return ret;
         }
 
@@ -126,7 +99,6 @@ namespace hashit
             }
             return -1;
         }
-        //if more than 20 don t insert
         public static int FindTheNextOpenAddress(string[] table, int ix)
         {
             if (string.IsNullOrEmpty(table[ix]))
