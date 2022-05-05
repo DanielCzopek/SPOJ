@@ -1,15 +1,14 @@
-﻿
+﻿using System;
+using System.IO;
 using System.Text;
 
-namespace hashit
+namespace HASHIT
 {
-    class Problem
+    class PROBLEM
     {
 
         public static void Main(string[] args)
         {
-            
-
             int t = Convert.ToInt32(Console.ReadLine());
 
             for (int i = 0; i < t; i++)
@@ -40,7 +39,6 @@ namespace hashit
                         case "DEL":
                             if (fkey != -1)
                             {
-                                
                                 if (fkey >= 0)
                                 {
                                     table[fkey] = string.Empty;
@@ -50,7 +48,6 @@ namespace hashit
                     }
 
                 }
-
                 StringBuilder builder = new StringBuilder();
                 int count = 0;
                 for (int j = 0; j < 101; j++)
@@ -99,6 +96,7 @@ namespace hashit
             }
             return -1;
         }
+        
         public static int FindTheNextOpenAddress(string[] table, int ix)
         {
             if (string.IsNullOrEmpty(table[ix]))
