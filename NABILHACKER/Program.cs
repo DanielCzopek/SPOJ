@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-public class Problem
-{
-    public static void Main()
-    {
-
-
+﻿
         int a = int.Parse(Console.ReadLine());
         string[] list = new string[a];
         for (int i = 0; i < a; i++)
@@ -41,5 +33,3 @@ public class Problem
         }
         for (int x = 0; x < a; x++)
             Console.WriteLine(list[x]);
-    }
-}
