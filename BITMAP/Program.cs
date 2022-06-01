@@ -3,61 +3,61 @@ using System.Collections.Generic;
 using System.Text;
 
 
-public static class BITMAP
+public static class Problem
 {
-    private static readonly Tuple<int, int>[] _neighborPixelTransformations = new[]
+    private static readonly Tuple<int, int>[] nightbor = new[]
     {
         Tuple.Create(-1, 0), Tuple.Create(1, 0),
         Tuple.Create(0, -1), Tuple.Create(0, 1),
     };
 
-    public static int?[,] Solve(int rowCount, int columnCount, string[] zeroOneRows)
+    public static int?[,] Solve(int Wiersz, int Kolumna, string[] ZerowyWiersz)
     {
-        int?[,] nearestWhitePixelDistances = new int?[rowCount, columnCount];
-        var pixelsToFloodFrom = new Queue<Tuple<int, int>>();
+        int?[,] Dystans = new int?[Wiersz, Kolumna];
+        var Fala = new Queue<Tuple<int, int>>();
 
 
-        for (int r = 0; r < rowCount; ++r)
+        for (int r = 0; r < Wiersz; ++r)
         {
-            for (int c = 0; c < columnCount; ++c)
+            for (int c = 0; c < Kolumna; ++c)
             {
-                if (zeroOneRows[r][c] == '1')
+                if (ZerowyWiersz[r][c] == '1')
                 {
-                    nearestWhitePixelDistances[r, c] = 0;
-                    pixelsToFloodFrom.Enqueue(Tuple.Create(r, c));
+                    Dystans[r, c] = 0;
+                    Fala.Enqueue(Tuple.Create(r, c));
                 }
             }
         }
 
-        while (pixelsToFloodFrom.Count > 0)
+        while (Fala.Count > 0)
         {
-            int waveSize = pixelsToFloodFrom.Count;
-            for (int i = 0; i < waveSize; ++i)
+            int rozmiar = Fala.Count;
+            for (int i = 0; i < rozmiar; ++i)
             {
-                Tuple<int, int> floodPixel = pixelsToFloodFrom.Dequeue();
-                int floodPixelRow = floodPixel.Item1;
-                int floodPixelColumn = floodPixel.Item2;
-                int nearestWhitePixelDistance
-                    = nearestWhitePixelDistances[floodPixelRow, floodPixelColumn].Value + 1;
+                Tuple<int, int> ElFali = Fala.Dequeue();
+                int WierszFali = ElFali.Item1;
+                int KolumnaFali = ElFali.Item2;
+                int Element
+                    = Dystans[WierszFali, KolumnaFali].Value + 1;
 
-                foreach (var neighborPixelTransformation in _neighborPixelTransformations)
+                foreach (var zmiana in nightbor)
                 {
-                    int neighborPixelRow = floodPixelRow + neighborPixelTransformation.Item1;
-                    int neighborPixelColumn = floodPixelColumn + neighborPixelTransformation.Item2;
+                    int Wiersz2 = WierszFali + zmiana.Item1;
+                    int Kolumna2 = KolumnaFali + zmiana.Item2;
 
-                    if (neighborPixelRow >= 0 && neighborPixelRow < rowCount
-                        && neighborPixelColumn >= 0 && neighborPixelColumn < columnCount
-                        && !nearestWhitePixelDistances[neighborPixelRow, neighborPixelColumn].HasValue)
+                    if (Wiersz2 >= 0 && Wiersz2 < Wiersz
+                        && Kolumna2 >= 0 && Kolumna2 < Kolumna
+                        && !Dystans[Wiersz2, Kolumna2].HasValue)
                     {
-                        nearestWhitePixelDistances[neighborPixelRow, neighborPixelColumn]
-                            = nearestWhitePixelDistance;
-                        pixelsToFloodFrom.Enqueue(Tuple.Create(neighborPixelRow, neighborPixelColumn));
+                        Dystans[Wiersz2, Kolumna2]
+                            = Element;
+                        Fala.Enqueue(Tuple.Create(Wiersz2, Kolumna2));
                     }
                 }
             }
         }
 
-        return nearestWhitePixelDistances;
+        return Dystans;
     }
 }
 
@@ -65,27 +65,27 @@ public static class Program
 {
     private static void Main()
     {
-        int remainingTestCases = int.Parse(Console.ReadLine());
-        while (remainingTestCases-- > 0)
+        int Test = int.Parse(Console.ReadLine());
+        while (Test-- > 0)
         {
-            int[] line = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
-            int rowCount = line[0];
-            int columnCount = line[1];
+            int[] linia = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
+            int ZliczWiersze = linia[0];
+            int ZliczKolumny = linia[1];
 
-            string[] zeroOneRows = new string[rowCount];
-            for (int r = 0; r < rowCount; ++r)
+            string[] ZeroweWiersze = new string[ZliczWiersze];
+            for (int r = 0; r < ZliczWiersze; ++r)
             {
-                zeroOneRows[r] = Console.ReadLine();
+                ZeroweWiersze[r] = Console.ReadLine();
             }
 
             var output = new StringBuilder();
-            int?[,] nearestWhitePixelDistances = BITMAP.Solve(rowCount, columnCount, zeroOneRows);
-            for (int r = 0; r < rowCount; ++r)
+            int?[,] Dystans = Problem.Solve(ZliczWiersze, ZliczKolumny, ZeroweWiersze);
+            for (int r = 0; r < ZliczWiersze; ++r)
             {
-                output.Append(nearestWhitePixelDistances[r, 0]);
-                for (int c = 1; c < columnCount; ++c)
+                output.Append(Dystans[r, 0]);
+                for (int c = 1; c < ZliczKolumny; ++c)
                 {
-                    output.Append($" {nearestWhitePixelDistances[r, c]}");
+                    output.Append($" {Dystans[r, c]}");
                 }
                 output.AppendLine();
             }
