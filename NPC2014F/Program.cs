@@ -9,7 +9,7 @@ public static class Globals
 	public static int m;
 	public static int[] cnt = new int[ALPHA];
 	public static int[] cur = new int[ALPHA];
-	public static string s = new string(new char[me]);
+	public static char[] s = new char[me];
 
 	public static bool CanRemove(int pos)
 	{
@@ -36,8 +36,7 @@ public static class Globals
 
 	internal static void Main(string[] args)
 	{
-		//ios_base::sync_with_stdio(0);
-		//cin.tie(0);
+		
 
 		string tempVar = Console.ReadLine();
 		if (tempVar != null)
@@ -47,7 +46,7 @@ public static class Globals
 		string tempVar2 = Console.ReadLine();
 		if (tempVar2 != null)
 		{
-			s.Substring(1) = int.Parse(tempVar2);
+            s.Substring(1) = int.Parse(tempVar2);
 		}
 		string tempVar3 = Console.ReadLine();
 		if (tempVar3 != null)
@@ -68,7 +67,7 @@ public static class Globals
 			{
 				ch = tempVar5[0];
 			}
-			x = cnt[ch];
+			x = cnt[ch].;
 		}
 		int ans = n + 1;
 		int ptr = 1;
