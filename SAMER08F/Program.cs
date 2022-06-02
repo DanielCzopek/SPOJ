@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public static class Problem
 {
     private const int limit = 100;
+    private static readonly IReadOnlyList<int> _kąty;
    
 
     static Problem()
@@ -27,12 +28,12 @@ public static class Problem
             kąty[i] += kąty[i - 2];
         }
 
-      
+        _kąty = kąty; 
     }
 
-    private static int SumFromOneUntil(int n)
-        => n * (n + 1) / 2;
-
+    private static int SumFromOneUntil(int i)
+        => i * (i + 1) / 2;
+    public static int Solve(int i) => _kąty[n];
     
 }
 
@@ -40,5 +41,10 @@ public static class Program
 {
     private static void Main()
     {
+        int i;
+        while ((i = int.Parse(Console.ReadLine())) != 0)
+        {
+            Console.WriteLine(Problem.Solve(i));
+        }
     }
 }
