@@ -115,5 +115,7 @@ public static class Problem
 				Union(x, y);
 			}
 		}
+	}
+}
 
 	
